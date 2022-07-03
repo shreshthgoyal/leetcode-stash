@@ -14,7 +14,7 @@ public:
         for(int i=0; i<wall[0].size(); i++)
             sum+=wall[0][i];
         
-        map<int,int> m;
+        unordered_map<int,int> m;
         
         for(int i=0; i<wall.size();i++)
         {
