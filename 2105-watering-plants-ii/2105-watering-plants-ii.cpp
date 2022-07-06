@@ -15,10 +15,7 @@ public:
                 tempA -= plants[i];
             else
                 tempA = capacityA-plants[i];
-        }
-        
-         for(int i=0; i<plants.size()/2; i++)
-        {
+
             check[plants.size()-1-i] = tempB < plants[plants.size()-1-i];
             
             if(tempB >= plants[plants.size()-1-i])
