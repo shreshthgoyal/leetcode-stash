@@ -11,9 +11,8 @@
  */
 class Solution {
 public:
-    int ans = 0;
     
-    void helper(TreeNode* root, int curr_sum)
+    void helper(TreeNode* root, int curr_sum, int& ans)
     {
         if(!root->left && !root->right)
         {
@@ -24,12 +23,12 @@ public:
         
         if(root->left)
         {
-            helper(root->left, curr_sum*10 + root->left->val);
+            helper(root->left, curr_sum*10 + root->left->val, ans);
         }
         
         if(root->right)
         {
-            helper(root->right, curr_sum*10 + root->right->val);
+            helper(root->right, curr_sum*10 + root->right->val, ans);
         }
         
     }
@@ -38,7 +37,9 @@ public:
         if(root==nullptr)
             return 0;
         
-        helper(root, root->val);
+        int ans = 0;
+
+        helper(root, root->val, ans);
 
         
         return ans;
