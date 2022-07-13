@@ -1,18 +1,6 @@
 class Solution {
 public:
-    
-    void help(int node, vector<int>& vis, vector<vector<int>>& adj, vector<int>&dfs)
-    {
-       dfs.push_back(node);
-        vis[node]=1;
-        
-        for(auto &i:adj[node])
-        {
-            if(!vis[i])
-                help(i,vis,adj,dfs);
-        }
-    }
-    
+   
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
         vector<vector<int>> adj(n);
         
@@ -27,21 +15,27 @@ public:
             adj[u].push_back(k);
             adj[k].push_back(u);
         }
-        vector<vector<int>> v;
+         
+        queue<int> q;
         
-        for(int i=0; i<vis.size(); i++)
-        {
-        vector<int> dfs;
-            if(vis[i] == 0)
-                help(i, vis, adj, dfs);
-            v.push_back(dfs);
-        }
+        q.push(source);
+        vis[source] = 1;
         
-        for(auto &i:v)
+        while(!q.empty())
         {
-          vector<int> p = i;
-           if(count(p.begin(), p.end(), source) && count(p.begin(), p.end(), destination))
-               return true;
+            int node = q.front();
+            q.pop();
+            
+            if(node==destination)
+                return true;
+            for(auto &i:adj[node])
+            {
+                if(!vis[i])
+                {
+                    q.push(i);
+                    vis[i]=1;
+                }
+            }
         }
         
         return false;        
