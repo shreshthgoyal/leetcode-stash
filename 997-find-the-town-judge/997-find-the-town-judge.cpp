@@ -1,19 +1,18 @@
 class Solution {
 public:
     int findJudge(int n, vector<vector<int>>& trust) {
-        unordered_map<int,int> m;        
-        unordered_map<int,int> v;
+        unordered_map<int,int> m;       
 
         
         for(auto &i:trust)
         {
-            m[i[0]]++;
-            v[i[1]]++;
+            m[i[0]]--;
+            m[i[1]]++;
         }
         
         for(int i=1; i<=n; i++)
         {
-            if(!m[i] && v[i] == n-1)
+            if(m[i] == n-1)
                 return i;
         }
         
