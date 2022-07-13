@@ -2,6 +2,7 @@ class Solution {
 public:
     int maximalNetworkRank(int n, vector<vector<int>>& roads) {
         vector<vector<int>> adj(n);
+        vector<vector<int>> check(n, vector<int>(n,0));
         
         int u,v;
         
@@ -12,6 +13,9 @@ public:
             
             adj[u].push_back(v);
             adj[v].push_back(u);
+            
+            check[u][v]=1;
+            check[v][u]=1;
         }
         
         int ans =INT_MIN;
@@ -23,11 +27,7 @@ public:
             {
                 if(i!=j)
                 {
-                rank = adj[i].size()+adj[j].size();
-                
-                if(count(adj[i].begin(), adj[i].end(), j))
-                    rank--;
-                
+                rank = adj[i].size()+adj[j].size() - check[i][j];
                 ans= max(ans, rank);
                 }
             }
