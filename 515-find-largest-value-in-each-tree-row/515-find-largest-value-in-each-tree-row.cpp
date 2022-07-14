@@ -18,7 +18,7 @@ public:
         queue<TreeNode*> q;
         q.push(root);
 
-        vector<int> k;
+        int k =INT_MIN;
 
         while(!q.empty())
         {
@@ -33,11 +33,11 @@ public:
                     q.push(node->right);
                 
                 int j = node->val;
-                k.push_back(j);            
+                k = max(k,j);            
             }
             
-            ans.push_back(*max_element(k.begin(),k.end()));
-            k.clear();
+            ans.push_back(k);
+            k = INT_MIN;
         }        
         return ans;
     }
