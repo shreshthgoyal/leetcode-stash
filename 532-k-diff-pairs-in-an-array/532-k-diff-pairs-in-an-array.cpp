@@ -2,25 +2,24 @@ class Solution {
 public:
     int findPairs(vector<int>& nums, int k) {
         unordered_map<int,int> m;
-        set<pair<int,int>> s;
         
         for(auto &i:nums)
             m[i]++;
         
-        
-        for(auto &i:nums)
+        int ans=0;
+        for(auto &i:m)
         {
-            if(k==0 && m[i] > 1)
+            if(k==0 && i.second > 1)
             {
-                s.insert({i,i});
+                ans++;
             }
-            else if(k!=0 && m[i-k] > 0)
+            else if(k!=0 && m.find(i.first+k)!=m.end())
             {
-                s.insert({i,i-k});
+                ans++;
             }
         }
     
         
-        return s.size();
+        return ans;
     }
 };
